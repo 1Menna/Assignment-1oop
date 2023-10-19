@@ -154,7 +154,7 @@ void printFilters(){
     cout<<"5-Rotate Image \n";
     cout<<"6-Darken and lighten Image\n";
     cout<<"7-Detect Edges Filter\n8-Enlarge Image \n";
-    cout<<"9-Shrink image\n";
+    cout<<"9-crop image\n";
     cout<<"10-Mirror Filter\n";
     cout<<"11-Shuffle Filter\n";
     cout<<"12-Shrink_image\n";
