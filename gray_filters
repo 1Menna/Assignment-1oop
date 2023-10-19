@@ -437,32 +437,69 @@ void Blure_image() {
         }
     }
 }
-void skew()
-{
-    double degree;cin >> degree ;
-    double toleave =tan(degree*3.14/180)*SIZE;
-    double step =(double)toleave/SIZE,curr=0,taken=0;
-    double compress =(double)SIZE/(SIZE-toleave);
-    for(int i=0;i<SIZE;i++) {//old photo
-        curr = 0;// column;
-        for (int j = toleave - taken; j <SIZE-taken; j++){//new photo
-            int sum = 0;//avg
-            int old_current =max(0,int(curr - compress));//0,0,2,4
-            int new_current =min( SIZE,int (curr + compress));//2,4,6,8
-            for (int k = max(0, old_current);
-                 k < min(new_current, SIZE); k++) {
-                sum += image1[i][k];
+void skew() {
+    cout << "1-skew vertically\n2-skew horizontally\n";
+    int num;
+    cin >> num;
+    if (num == 1) {
+        cout << "enter the degree\n";
+        double degree;
+        cin >> degree;
+        double toleave = tan(degree * 3.14 / 180) * SIZE;
+        double step = (double) toleave / SIZE, curr = 0, taken = 0;
+        double compress = (double) SIZE / (SIZE - toleave);
+        for (int i = 0; i < SIZE; i++) {//old photo
+            curr = 0;// column;
+            for (int j = toleave - taken; j < SIZE - taken; j++) {//new photo
+                int sum = 0;//avg
+                int old_current = max(0, int(curr - compress));//0,0,2,4
+                int new_current = min(SIZE, int(curr + compress));//2,4,6,8
+                for (int k = max(0, old_current);
+                     k < min(new_current, SIZE); k++) {
+                    sum += image1[i][k];
+                }
+                int pixels = new_current - old_current;//num of pixel
+                image2[i][j] = sum / max(1, pixels);//
+                curr += compress;//2//4//6//8
             }
-            int pixels=new_current-old_current;//num of pixel
-            image2[i][j]=sum/max(1,pixels);//
-            curr+=compress;//2//4//6//8
-        }
 
-        taken+=step;
+            taken += step;
+        }
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image1[i][j] = image2[i][j];
+            }
+        }
+    } else {
+        cout << "enter the degree\n";
+        double degree;
+        cin >> degree;
+        double toleave = tan(degree * 3.14 / 180) * SIZE;
+        double step = (double) toleave / SIZE, curr = 0, taken = 0;
+        double compress = (double) SIZE / (SIZE - toleave);
+        for (int j = 0; j < SIZE; j++) {//old photo
+            curr = 0;// column;
+            for (int i = toleave - taken; i < SIZE - taken; i++) {//new photo
+                int sum = 0;//avg
+                int old_current = max(0, int(curr - compress));//0,0,2,4
+                int new_current = min(SIZE, int(curr + compress));//2,4,6,8
+                for (int k = max(0, old_current);
+                     k < min(new_current, SIZE); k++) {
+                    sum += image1[k][j];
+                }
+                int pixels = new_current - old_current;//num of pixel
+                image2[i][j] = sum / max(1, pixels);//
+                curr += compress;//2//4//6//8
+            }
+
+            taken += step;
+        }
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                image1[i][j] = image2[i][j];
+            }
+        }
     }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image1[i][j]=image2[i][j];
-        }}
+
+
 }
- 
