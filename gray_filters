@@ -4,8 +4,8 @@
 // Purpose: Get a Gray Scale image and produce a filtered image (any filter the user choose).
 // Under supervision of DR. Mohammad El-Ramly
 // Last modification date: 19/10/2023
-// Author and ID and : Habiba Mohamed, 20220106, Eng7abiba55@gmail.com
-// Author and ID and : Omar Mahmoud, 20220233, omar.mahmoud25102004@gmail.com
+// Author and ID and : Habiba Mohamed  , 20220106, Eng7abiba55@gmail.com
+// Author and ID and : Omar Mahmoud    , 20220233, omar.mahmoud25102004@gmail.com
 // Author and ID and : Menna Allah Reda, 20221164, meno903010@gmail.com
 
 #include <bits/stdc++.h>
