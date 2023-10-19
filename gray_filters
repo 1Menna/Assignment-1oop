@@ -461,7 +461,7 @@ void shrink_image()
     If yes, take the corresponding pixel from the original image.
     If not, fill with white pixel (assuming 255 represents white).*/
     int size;
-    cout<<"plz enter the size of photo^_^\n";
+    cout<<" Enter size to shrink image to (1/size)\n";
     cin>> size;
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
