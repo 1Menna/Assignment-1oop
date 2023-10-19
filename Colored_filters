@@ -144,16 +144,21 @@ void flipImage(){
 void detectEdgeFilter(){
     /*make the edges of the objects in the image black
     depending on the difference of the value of each pixel with the others*/
+    cout<<"Enter 1 for black edges, or 2 for colored edges: ";
+    int n;
+    cin>>n;
+    if (n == 1) grayImage();
     for (int i = 0; i<SIZE; i++)
         for (int j = 0; j<SIZE; j++)
-            for(int k=0;k<RGB;k++){
+            for(int k=0;k<(n == 1? 1:RGB);k++){
                 if (abs(image[i][j][k] - image[i][j+1][k]) > 30 ||
                     abs(image[i][j][k] - image[i+1][j][k]) > 30
                     || (i && abs(image[i][j][k] - image[i-1][j][k]) > 30) ||
                     (j && abs(image[i][j][k] - image[i][j-1][k]) > 30))
                     image2[i][j][k] = 0;
                 else
-                    image2[i][j][k] = 255;}
+                    image2[i][j][k] = 255;
+            }
     for (int i = 0; i<SIZE; i++)
         for (int j = 0; j<SIZE; j++)
             for(int k=0;k<RGB;k++)
