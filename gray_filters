@@ -159,6 +159,7 @@ void printFilters(){
     cout<<"11-Shuffle Filter\n";
     cout<<"12-Shrink_image\n";
     cout<<"13-Blur_image\n";
+    cout<<"14-skew_image\n";
     cout<<"0-Exit \n";
     cout<<"Choose number: ";
 }
