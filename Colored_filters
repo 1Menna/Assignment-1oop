@@ -378,7 +378,7 @@ void shrink_image(){
     int size;
 
     // Prompt user to enter the size factor
-    cout << "Please enter the size factor for shrinking the photo: ";
+    cout<<" Enter size to shrink image to (1/size)\n";
     cin >> size;
 
     // Iterate through the new smaller image dimensions
