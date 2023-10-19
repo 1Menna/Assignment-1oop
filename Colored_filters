@@ -48,13 +48,15 @@ void printFilters(){
     cout<<"4-Flip Image \n";
     cout<<"5-Rotate Image \n";
     cout<<"6-Darken and lighten Image\n";
-    cout<<"7-Detect Edges Filter\n8-Enlarge Image \n";
-    cout<<"9-Shrink image\n";
+    cout<<"7-Detect Edges Filter\n";
+     cout<< "8-Enlarge Image \n";
+    cout<<"9-crop image\n";
     cout<<"10-Mirror Filter\n";
     cout<<"11-Shuffle Filter\n";
     cout<<"12-Shrink_image\n";
     cout<<"13-Blur_image\n";
-    cout<<"14-skew_image\n";
+    cout<<"14-skew herizontelly and vertically\n";
+    cout<<"15-gray_image\n";
     cout<<"0-Exit \n";
     cout<<"Choose number: ";
 }
@@ -99,6 +101,23 @@ void grayImage(){
                 image[i][j][k] = av;
         }
 }
+// This function merges two images by averaging the RGB values of corresponding pixels.
+void mergeImages(){
+    // Loop through the rows of the images.
+    for (int i = 0; i < SIZE; i++) {
+        // Loop through the columns of the images.
+        for (int j = 0; j < SIZE; j++) {
+            // Loop through the RGB channels (Red, Green, Blue) of the pixels.
+            for (int k = 0; k < RGB; k++) {
+                // Average the corresponding RGB values of the two images and
+                // store the result in the first image.
+                image[i][j][k] = (image[i][j][k] + image2[i][j][k]) / 2;
+            }
+        }
+    }
+}
+
+
 
 void flipImage(){
     cout<<"Enter H for horizontal flip, or V for vertical flip: ";
@@ -162,12 +181,6 @@ void mirrorImage(){
 }
 
 
-void mergeImages(){
-    for (int i = 0; i<SIZE; i++)
-        for (int j = 0; j<SIZE; j++)
-            for (int k = 0; k<RGB; k++)
-                image[i][j][k] = (image[i][j][k] + image2[i][j][k]) / 2;
-}
 
 void cropImage(){
     int x,y,l,w;
@@ -183,37 +196,61 @@ void cropImage(){
                 for (int k = 0; k < RGB; k++)
                     image[i][j][k] = 255;
 }
+
+// This function prompts the user to choose whether they want to make the image lighter or darker.
 void light_And_darker()
 {
     cout <<"What do u want light(l)or darker(d)? ";
-    char c ;
-    cin >> c ;
-    if(tolower(c)=='l'){
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j< SIZE; j++) {
-                for(int k=0;k<RGB;k++)
 
+    char c ;
+
+    cin >> c ;
+
+    // Check if the user input is 'l' (indicating they want to make the image lighter).
+    if(tolower(c)=='l'){
+        // Iterate through the rows of the image.
+        for (int i = 0; i < SIZE; i++) {
+            // Iterate through the columns of the image.
+            for (int j = 0; j< SIZE; j++) {
+                // Iterate through the RGB components of the image.
+                for(int k=0;k<RGB;k++)
+                    // Modify the current pixel's RGB value to make it lighter.
+                    // The pixel's intensity is increased by adding 255 and then dividing by 2.
                     image[i][j][k] = (255 + image[i][j][k]) / 2;
             }
         }
     }
+        // If the user input is 'd', the code to make the image darker is missing.
+        // It should be added here with similar nested loops and appropriate calculations.
+        // ...
+
+        // Check if the user input is 'd' (indicating they want to make the image darker).
     else if(tolower(c)=='d')
     {
+        // Iterate through the rows of the image.
         for (int i = 0; i < SIZE; i++) {
+            // Iterate through the columns of the image.
             for (int j = 0; j< SIZE; j++) {
+                // Iterate through the RGB components of the image.
                 for(int k=0;k<RGB;k++)
-
+                    // Modify the current pixel's RGB value to make it darker.
+                    // The pixel's intensity is halved by dividing by 2.
                     image[i][j][k] =  image[i][j][k] / 2;
             }
         }
     }
+        // If the user input is neither 'l' nor 'd', prompt the user again.
     else
     {
         cout<<"Invalid input Plz try again ^_^"<<nl;
+        // Recursively call the function to prompt the user again for a valid input.
         light_And_darker();
     }
 }
-void RotateImage(){
+
+
+
+ void RotateImage(){
     int p=0;
     cout<<"choose the angle of rotate by clockwise\n";
     cout<<"1-90 degree\n2-180 degree\n3-270 degree\n";
@@ -258,62 +295,75 @@ void shuffle(){
             }
         }}
 //quarter2
-for (int i = 0; i < 127; i++) {
-     for (int j = 127; j < SIZE; j++) {
-         for(int k=0; k<RGB;k++){
-            if(q2==1)
-               image[i][j][k]=copy[i][j-127][k];
-             else if(q2==2)
-                 image[i][j][k]=copy[i][j][k];
-             else if(q2==3)
-                image[i][j][k]=copy[i+127][j-127][k];
-             else if(q2==4)
-                 image[i][j][k]=copy[i+127][j][k];
-          }
-             }}
+    for (int i = 0; i < 127; i++) {
+        for (int j = 127; j < SIZE; j++) {
+            for(int k=0; k<RGB;k++){
+                if(q2==1)
+                    image[i][j][k]=copy[i][j-127][k];
+                else if(q2==2)
+                    image[i][j][k]=copy[i][j][k];
+                else if(q2==3)
+                    image[i][j][k]=copy[i+127][j-127][k];
+                else if(q2==4)
+                    image[i][j][k]=copy[i+127][j][k];
+            }
+        }}
 //quarter3
-  for (int i = 127; i < SIZE; i++) {
-      for (int j = 0; j < 127; j++) {
-          for(int k=0; k<RGB;k++){
+    for (int i = 127; i < SIZE; i++) {
+        for (int j = 0; j < 127; j++) {
+            for(int k=0; k<RGB;k++){
 
-       if(q3==1)
-          image[i][j][k]=copy[i-127][j][k];
-       else if(q3==2)
-          image[i][j][k]=copy[i-127][j+127][k];
-        else if(q3==3)
-           image[i][j][k]=copy[i][j][k];
-       else if(q3==4)
-           image[i][j][k]=copy[i][j+127][k];
-}}}
-//quarter4
-for (int i = 127; i < SIZE; i++) {
-     for (int j = 127; j < SIZE; j++) {
-         for(int k=0; k<RGB;k++){
-        if(q4==1)
-          image[i][j][k]=copy[i-127][j-127][k];
-        else if(q4==2)
+                if(q3==1)
                     image[i][j][k]=copy[i-127][j][k];
-        else if(q4==3)
-                 image[i][j][k]=copy[i][j-127][k];
-        else if(q4==4)
-            image[i][j][k]=copy[i][j][k];
-}}
-}}
-
+                else if(q3==2)
+                    image[i][j][k]=copy[i-127][j+127][k];
+                else if(q3==3)
+                    image[i][j][k]=copy[i][j][k];
+                else if(q3==4)
+                    image[i][j][k]=copy[i][j+127][k];
+            }}}
+//quarter4
+    for (int i = 127; i < SIZE; i++) {
+        for (int j = 127; j < SIZE; j++) {
+            for(int k=0; k<RGB;k++){
+                if(q4==1)
+                    image[i][j][k]=copy[i-127][j-127][k];
+                else if(q4==2)
+                    image[i][j][k]=copy[i-127][j][k];
+                else if(q4==3)
+                    image[i][j][k]=copy[i][j-127][k];
+                else if(q4==4)
+                    image[i][j][k]=copy[i][j][k];
+            }}
+    }}
 void shrink_image()
 {
     int size;
-    cout<<"plz enter the size of photo^_^\n";
-    cin>> size;
+
+    // Prompt user to enter the size factor
+    cout << "Please enter the size factor for shrinking the photo: ";
+    cin >> size;
+
+    // Iterate through the new smaller image dimensions
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            for(int k=0;k<RGB;k++){
-                if(i <SIZE/size&& j<SIZE/size)
-                    image[i][j][k]=image[i*size][j*size][k];
+            for(int k = 0; k < RGB; k++){
+
+                // Check if the current pixel is within the boundaries of the resized image
+                if (i < SIZE / size && j < SIZE / size)
+
+                    // If yes, take the corresponding pixel from the original image
+                    image[i][j][k] = image[i * size][j * size][k];
                 else
-                    image[i][j][k]=255;
-            }}}}
-void Blure_image() {
+
+                    // If not, fill with white pixel (assuming 255 represents white)
+                    image[i][j][k] = 255;
+            }
+        }
+    }
+}
+
+ void Blure_image() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             for(int k=0;k<RGB;k++){
@@ -384,42 +434,64 @@ void enlarge_filter(){
             }
         }
     }}
-void skew() {
-    cout << "1-skew vertically\n2-skew horizontally\n";
+void skew()
+{
+   cout << "1-skew vertically\n2-skew horizontally\n";
     int num;
     cin >> num;
-    if (num == 1) {
-        cout << "enter the degree\n";
-        double degree;
-        cin >> degree;
-        double toleave = tan(degree * 3.14 / 180) * SIZE;
-        double step = (double) toleave / SIZE, curr = 0, taken = 0;
-        double compress = (double) SIZE / (SIZE - toleave);
-        for (int i = 0; i < SIZE; i++) {//old photo
-            curr = 0;// column;
-            for (int j = toleave - taken; j < SIZE - taken; j++) {//new photo
-                for (int z = 0; z < RGB; z++) {
-                    int sum = 0;//avg
-                    int old_current = max(0, int(curr - compress));//0,0,2,4
-                    int new_current = min(SIZE, int(curr + compress));//2,4,6,8
-                    for (int k = max(0, old_current);
-                         k < min(new_current, SIZE); k++) {
-                        sum += image[i][k][z];
-                    }
-                    int pixels = new_current - old_current;//num of pixel
-                    image2[i][j][z] = sum / max(1, pixels);}//
-                curr += compress;//2//4//6//8
-            }
+    if (num == 2) {
+    // Read the angle in degrees from user input
+    double degree;
+    cin >> degree;
 
-            taken += step;
-        }
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for(int k=0;k<RGB;k++){
-                image[i][j][k] = image2[i][j][k];}
+    // Calculate the amount to leave empty on each side after skewing
+    double toleave = tan(degree * 3.14 / 180) * SIZE;
+
+    // Calculate the step size for skewing
+    double step = (double)toleave / SIZE;
+    double curr = 0, taken = 0;
+
+    // Calculate the compression factor for skewing
+    double compress = (double)SIZE / (SIZE - toleave);
+
+    // Iterate through the rows of the image
+    for(int i = 0; i < SIZE; i++) {//old photo
+        curr = 0;// column;
+
+        // Iterate through the columns of the skewed image
+        for (int j = toleave - taken; j < SIZE - taken; j++) {
+            for (int z = 0; z < RGB; z++) {
+                int sum = 0;//avg
+
+                // Calculate the range of old and new pixels to consider during skewing
+                int old_current = max(0, int(curr - compress));//0,0,2,4
+                int new_current = min(SIZE, int(curr + compress));//2,4,6,8
+
+                // Iterate through the pixels in the old image and calculate the average
+                for (int k = max(0, old_current); k < min(new_current, SIZE); k++) {
+                    sum += image[i][k][z];
+                }
+
+                // Calculate the number of pixels in the range
+                int pixels = new_current - old_current;//num of pixel
+
+                // Update the pixel value in the skewed image
+                image2[i][j][z] = sum / max(1, pixels);
             }
+            curr += compress; // Update the current column position
         }
-    } else {
+
+        taken += step; // Update the amount of pixels taken from each side
+    }
+
+    // Copy the skewed image back to the original image array
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for(int k = 0; k < RGB; k++)
+                image[i][j][k] = image2[i][j][k];
+        }
+    }}
+    else {
         cout << "enter the degree\n";
         double degree;
         cin >> degree;
@@ -455,7 +527,8 @@ void skew() {
 
 }
 
- int main()
+
+int main()
 {
     cout << "Ahlan ya user ya habiby^_^ :)  \n\n";
     loadImage();
@@ -472,7 +545,7 @@ void skew() {
                 break;
             case 3://done
                 loadImage2();
-                mergeImages();
+               mergeImages();
                 break;
             case 4:// done
                 flipImage();
@@ -506,6 +579,9 @@ void skew() {
                 break;
             case 14://done
                 skew();
+                break;
+            case 15:
+                grayImage();
                 break;
             default:
                 cout << "INVALID...";
